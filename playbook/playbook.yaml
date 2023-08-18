@@ -1,1 +1,19 @@
-test
+---  
+- name: Play 1 - upgrade FW on SNR-S2985G switches
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    ansible_user: admin
+    ansible_ssh_pass: admin
+    ansible_network_os: ios
+
+  tasks:
+    - name: Get show version
+      ios_command:
+        commands: show version
+      register: sh_ver
+
+    - name: Display show version
+      debug:
+        msg: "{{sh_ver}}"
